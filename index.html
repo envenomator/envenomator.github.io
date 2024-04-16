@@ -3,10 +3,10 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Agon recovery utility installer</title>
+    <title>Agon VDP installer</title>
     <meta
       name="description"
-      content="Easily allow users to install Agon recovery utility from a web browser"
+      content="Easily allow users to install Agon VDP firmware from a web browser"
     />
     <meta name="viewport" content="width=device-width" />
     <meta name="color-scheme" content="dark light" />
@@ -80,26 +80,27 @@
   </head>
   <body>
     <div class="content">
-      <h1>Agon recovery utility installer</h1>
-      <p>This web installer is available in Google Chrome/Chromium and Microsoft Edge browsers with Web Serial support. Please see the <a href="https://github.com/envenomator/agon-recovery">documentation</a> for other installation methods.</p>
-      <p>Select recovery version</p>
+      <h1>Agon VDP installer</h1>
+      <p>This web installer is available in Google Chrome/Chromium and Microsoft Edge browsers with Web Serial support. Please see the <a href="https://github.com/envenomator/agon-binaries">documentation</a> for other installation methods.</p>
+      <p>Select version:</p>
       <ul class="radios">
         <li>
-          <label><input type="radio" name="type" value="console8" /> Console8 MOS 2.2.3 / VDP 2.73</label>
+          <label><input type="radio" name="type" value="console8-v2.7.3" /> Console8 VDP v2.7.3</label>
         </li>
-	<!--
         <li>
-          <label><input type="radio" name="type" value="quark" /> Quark MOS 1.04 / VDP 1.04 (Not yet available)</label>
+          <label><input type="radio" name="type" value="quark-v1.04" /> Quark VDP v1.0.4</label>
         </li>
-	<-->
+        <li>
+		<label><input type="radio" name="type" value="recovery" /> Agon recovery utility (<a href="https://github.com/envenomator/agon-recovery#preparation">requirements</a>)</label>
+        </li>
       </ul>
       <p class="button-row" align="center">
         <esp-web-install-button class="invisible"></esp-web-install-button>
       </p>
 
       <div class="footer">
-        <a href="https://github.com/envenomator/agon-recovery"
-          >Agon recovery utility</a
+        <a href="https://github.com/envenomator/agon-binaries"
+          >Agon VDP installer</a
         > &mdash;
         powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
     </div>
