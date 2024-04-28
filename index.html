@@ -84,18 +84,11 @@
       <p>This web installer is available in Google Chrome/Chromium and Microsoft Edge browsers with Web Serial support. Please see the <a href="https://github.com/envenomator/agon-binaries">documentation</a> for other installation methods.</p>
       <p>Select version:</p>
       <ul class="radios">
-        <li>
-          <label><input type="radio" name="type" value="console8-v2.8.1" /> Console8 VDP v2.8.1</label>
-        </li>
-        <li>
-          <label><input type="radio" name="type" value="console8-v2.7.3" /> Console8 VDP v2.7.3</label>
-        </li>
-        <li>
-          <label><input type="radio" name="type" value="quark-v1.04" /> Quark VDP v1.0.4</label>
-        </li>
-        <li>
-		<label><input type="radio" name="type" value="recovery" /> Agon recovery utility (<a href="https://github.com/envenomator/agon-recovery#preparation">requirements</a>)</label>
-        </li>
+        <!--RELEASES-->
+        <li><label><input type="radio" name="type" value="console8-v2.8.1" /> Console8 VDP v2.8.1</label></li>
+        <li><label><input type="radio" name="type" value="console8-v2.7.3" /> Console8 VDP v2.7.3</label></li>
+        <li><label><input type="radio" name="type" value="quark-v1.04" /> Quark VDP v1.0.4</label></li>
+        <li><label><input type="radio" name="type" value="recovery" /> Agon recovery utility (<a href="https://github.com/envenomator/agon-recovery#preparation">requirements</a>)</label></li>
       </ul>
       <p class="button-row" align="center">
         <esp-web-install-button class="invisible"></esp-web-install-button>
@@ -111,7 +104,7 @@
       document.querySelectorAll('input[name="type"]').forEach(radio =>
         radio.addEventListener("change", () => {
           const button = document.querySelector('esp-web-install-button');
-	  button.manifest = `./manifest_${radio.value}.json`;
+          button.manifest = `firmware/manifest_${radio.value}.json`;
           button.classList.remove('invisible');
         }
       ));

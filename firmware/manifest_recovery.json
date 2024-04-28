@@ -1,0 +1,14 @@
+{
+  "name": "Agon recovery utility",
+  "version": "1.0",
+  "home_assistant_domain": "none",
+  "funding_url": "https://esphome.io/guides/supporters.html",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "recovery/merged.bin", "offset": 0 }
+      ]
+    }
+  ]
+}

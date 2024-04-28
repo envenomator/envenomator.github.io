@@ -1,0 +1,14 @@
+{
+  "name": "Agon Console8 VDP v2.7.3",
+  "version": "",
+  "home_assistant_domain": "none",
+  "funding_url": "https://esphome.io/guides/supporters.html",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "console8-v2.7.3/merged.bin", "offset": 0 }
+      ]
+    }
+  ]
+}
