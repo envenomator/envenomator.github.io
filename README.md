@@ -51,13 +51,25 @@ Leave **WorkMode** at *Develop*:
 
 ![espressif settings2](./media/flash-settings2.png)
 
-Next, on the main screen, take care to specify these exact addresses for:
+---
 
-|    Filename    | Address |
-|:--------------:|--------:|
-| merged.bin     |     0x0 |
+Next, on the main screen, take care to specify these address details for a single (pre)merged binary:
 
-And **make sure** to **SELECT** the checkboxes on the left, to select all files to flash.
+|      Filename      | Address |
+|:------------------:|--------:|
+|     merged.bin     |     0x0 |
+
+---
+
+If you are using separate bootloader/partitions/firmware files, the addresses are:
+|      Filename      | Address |
+|:------------------:|--------:|
+| bootloader.bin     |  0x1000 |
+| partitions.bin     |  0x8000 |
+|   firmware.bin     | 0x10000 |
+
+
+And **make sure** to **SELECT** the checkbox(es) on the left, to select all files to flash.
 
 ![espressif settings2](./media/flash-tool.png)
 
@@ -65,6 +77,6 @@ And **make sure** to **SELECT** the checkboxes on the left, to select all files 
 - SPI mode can be DIO, or QIO
 - Please don't use the CombineBin/Default buttons
 - Leave the *DoNotChgBin* option selected
-- provide your own serial port details from the **DROPDOWN** and don't type it in.
+- provide your own serial port details from the **DROPDOWN**; don't type it in.
  
 Then press 'Start' and wait for the tool to finish. It might be necessary to press the 'reset' button after the tool is done.
