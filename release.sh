@@ -6,6 +6,24 @@ if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
     exit 1
 fi
 
+# Check required tools
+if ! command -v crc32 >%2; then
+    echo command 'crc32' not available
+    exit 1
+fi
+if ! command -v unzip >%2; then
+    echo command 'unzip' not available
+    exit 1
+fi
+if ! command -v wget >%2; then
+    echo command 'wget' not available
+    exit 1
+fi
+if ! command -v esptool.py >%2; then
+    echo command 'esptool.py' not available
+    exit 1
+fi
+
 # Check arguments, or set defaults
 if [ "$1" = "console8" ]; then
     if [ "$#" -eq 1 ]; then
@@ -28,7 +46,7 @@ fi
 RELEASEDIR=./firmware/$1-$TAG
 echo Creating release directory \'$RELEASEDIR\'...
 rm -rf $RELEASEDIR
-mkdir $RELEASEDIR -p
+mkdir -p $RELEASEDIR
 
 # Copy baseline user tools/scripts
 echo Unzipping baseline tools...
@@ -66,15 +84,23 @@ echo Create manifest for $TAG
 MANIFEST=firmware/manifest_console8-$TAG.json
 rm -f $MANIFEST
 cp firmware/manifest_template.json $MANIFEST
-sed -i "s/REPLACETAG/$TAG/g" $MANIFEST
-
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i '' 's/REPLACETAG/$TAG/g' $MANIFEST
+else
+    sed -i 's/REPLACETAG/$TAG/g' $MANIFEST
+fi
 # Add to html list
 echo Add to INDEX.HTML list
 PRESENT=`fgrep $TAG index.html`
 if [ -z "$PRESENT" ]; then
-    sed -i "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"console8-$TAG\" \/> Console8 VDP $TAG<\/label><\/li>/g" index.html
-    sed -i 's/\r//' index.html
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"console8-$TAG\" \/> Console8 VDP $TAG<\/label><\/li>/g" index.html
+        sed -i '' 's/\r//' index.html
+    else
+        sed -i "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"console8-$TAG\" \/> Console8 VDP $TAG<\/label><\/li>/g" index.html
+        sed -i 's/\r//' index.html
+    fi    
 fi
-echo CRC32 checksum of original firmware is 0x${CHECKSUM^^}
-echo ${CHECKSUM^^} > $RELEASEDIR/CRC32
+echo CRC32 checksum of original firmware is 0x${CHECKSUM}
+echo ${CHECKSUM} > $RELEASEDIR/CRC32
 echo Done.
