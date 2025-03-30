@@ -7,19 +7,19 @@ if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
 fi
 
 # Check required tools
-if ! command -v crc32 >&2; then
+if ! command -v crc32 >/dev/null; then
     echo command 'crc32' not available
     exit 1
 fi
-if ! command -v unzip >&2; then
+if ! command -v unzip >/dev/null; then
     echo command 'unzip' not available
     exit 1
 fi
-if ! command -v wget >&2; then
+if ! command -v wget >/dev/null; then
     echo command 'wget' not available
     exit 1
 fi
-if ! command -v esptool.py >&2; then
+if ! command -v esptool.py >/dev/null; then
     echo command 'esptool.py' not available
     exit 1
 fi
