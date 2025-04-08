@@ -85,7 +85,7 @@ MANIFEST=firmware/manifest_console8-$TAG.json
 rm -f $MANIFEST
 cp firmware/manifest_template.json $MANIFEST
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' 's/REPLACETAG/$TAG/g' $MANIFEST
+    sed -i '' "s/REPLACETAG/$TAG/g" $MANIFEST
 else
     sed -i 's/REPLACETAG/$TAG/g' $MANIFEST
 fi
