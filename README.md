@@ -2,7 +2,7 @@
 This git contains flashable VDP binaries for the Agon platform.
 
 ## Where can I find MOS binaries?
-- The latest [Console8 MOS](https://github.com/AgonConsole8/agon-mos/releases/latest/download/MOS.bin)
+- The latest [AgonPlatform MOS](https://github.com/AgonPlatform/agon-mos/releases/latest/download/MOS.bin)
 - The latest [Quark MOS](https://github.com/breakintoprogram/agon-mos/releases/latest/download/MOS.bin)
 
 ## Flashing VDP
