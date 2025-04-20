@@ -2,7 +2,7 @@
 
 # Usage
 if [ "$#" -eq 0 ] || [ "$#" -gt 2 ]; then
-    echo "Usage: release [console8|quark] <releasetag>"
+    echo "Usage: release [agonplatform|quark] <releasetag>"
     exit 1
 fi
 
@@ -25,9 +25,9 @@ if ! command -v esptool.py >/dev/null; then
 fi
 
 # Check arguments, or set defaults
-if [ "$1" = "console8" ]; then
+if [ "$1" = "agonplatform" ]; then
     if [ "$#" -eq 1 ]; then
-        TAG=`curl 2>/dev/null "https://api.github.com/repos/AgonConsole8/agon-vdp/tags" | jq -r '.[0].name'`
+        TAG=`curl 2>/dev/null "https://api.github.com/repos/AgonPlatform/agon-vdp/tags" | jq -r '.[0].name'`
     else
         TAG=$2
     fi
@@ -52,17 +52,17 @@ mkdir -p $RELEASEDIR
 echo Unzipping baseline tools...
 unzip -d $RELEASEDIR firmware/baseline.zip >/dev/null 2>&1
 
-# Download latest Console8 release
+# Download latest AgonPlatform release
 echo Downloading release binaries...
-if ! wget 2>/dev/null https://github.com/AgonConsole8/agon-vdp/releases/download/$TAG/bootloader.bin -P $RELEASEDIR; then
+if ! wget 2>/dev/null https://github.com/AgonPlatform/agon-vdp/releases/download/$TAG/bootloader.bin -P $RELEASEDIR; then
     echo Download of bootloader.bin failed
     exit 1
 fi
-if ! wget 2>/dev/null https://github.com/AgonConsole8/agon-vdp/releases/download/$TAG/partitions.bin -P $RELEASEDIR; then
+if ! wget 2>/dev/null https://github.com/AgonPlatform/agon-vdp/releases/download/$TAG/partitions.bin -P $RELEASEDIR; then
     echo Download of partitions.bin failed
     exit 1
 fi
-if ! wget 2>/dev/null https://github.com/AgonConsole8/agon-vdp/releases/download/$TAG/firmware.bin -P $RELEASEDIR; then
+if ! wget 2>/dev/null https://github.com/AgonPlatform/agon-vdp/releases/download/$TAG/firmware.bin -P $RELEASEDIR; then
     echo Download of firmware.bin failed
     exit 1
 fi
@@ -81,7 +81,7 @@ rm $RELEASEDIR/partitions.bin
 
 # Create manifest
 echo Create manifest for $TAG
-MANIFEST=firmware/manifest_console8-$TAG.json
+MANIFEST=firmware/manifest_agonplatform-$TAG.json
 rm -f $MANIFEST
 cp firmware/manifest_template.json $MANIFEST
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -94,10 +94,10 @@ echo Add to INDEX.HTML list
 PRESENT=`fgrep $TAG index.html`
 if [ -z "$PRESENT" ]; then
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"console8-$TAG\" \/> Console8 VDP $TAG<\/label><\/li>/g" index.html
+        sed -i '' "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"agonplatform-$TAG\" \/> AgonPlatform VDP $TAG<\/label><\/li>/g" index.html
         sed -i '' 's/\r//' index.html
     else
-        sed -i "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"console8-$TAG\" \/> Console8 VDP $TAG<\/label><\/li>/g" index.html
+        sed -i "s/<\!\-\-RELEASES\-\->/<\!\-\-RELEASES\-\->\\n        <li><label><input type=\"radio\" name=\"type\" value=\"agonplatform-$TAG\" \/> AgonPlatform VDP $TAG<\/label><\/li>/g" index.html
         sed -i 's/\r//' index.html
     fi    
 fi
