@@ -23,6 +23,21 @@
         margin: 0 auto;
         padding: 12px;
       }
+      fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      legend {
+        font-weight: bold;
+        margin-bottom: 0.5em;
+      }
+      fieldset hr {
+        border: none;
+        border-top: 1px dashed #ccc;
+        width: 45%;
+        margin: 1em 0 1em 1.5em; /* indent left */
+      }
       h2 {
         margin-top: 2em;
       }
@@ -43,17 +58,25 @@
       }
       .content pre {
         max-width: 100%;
-        overflow-y: scroll;
+        overflow-y: auto;
       }
       .footer {
         margin-top: 24px;
-        border-top: 1px solid #ccc;
-        padding-top: 24px;
+        border-top: 1px solid #666;
+        padding-top: 16px;
         text-align: center;
+        color: #666;
+        font-size: 0.8em;
       }
       .footer .initiative {
         font-style: italic;
         margin-top: 16px;
+      }
+      .footer a {
+        color: #666;
+      }
+      .footer a:hover {
+        text-decoration: underline;
       }
       table {
         border-spacing: 0;
@@ -81,24 +104,23 @@
   <body>
     <div class="content">
       <h1>Agon VDP installer</h1>
-      <p>This web installer is available in Google Chrome/Chromium and Microsoft Edge browsers with Web Serial support. Please see the <a href="https://github.com/envenomator/envenomator.github.io">documentation</a> for other installation methods.</p>
-      <p>Select version:</p>
-      <ul class="radios">
+      <p>This web installer is available in browsers with Web Serial support, such as Google Chrome or Microsoft Edge. Please see the <a href="https://github.com/envenomator/envenomator.github.io">documentation</a> for other installation methods.</p>
+      <fieldset class="radios">
+        <legend>Select firmware:</legend>
         <!--RELEASES-->
         <li><label><input type="radio" name="type" value="agonplatform-v2.15.0" /> AgonPlatform VDP v2.15.0</label></li>
         <li><label><input type="radio" name="type" value="agonplatform-v2.14.1" /> AgonPlatform VDP v2.14.1</label></li>
         <li><label><input type="radio" name="type" value="quark-v1.04" /> Quark VDP v1.0.4</label></li>
+        <hr>
         <li><label><input type="radio" name="type" value="recovery" /> Agon recovery utility (<a href="https://github.com/envenomator/agon-recovery#preparation">requirements</a>)</label></li>
-      </ul>
-      <p class="button-row" align="center">
-        <esp-web-install-button class="invisible"></esp-web-install-button>
-      </p>
+        <p class="button-row">
+          <esp-web-install-button class="invisible"></esp-web-install-button>
+        </p>
+      </fieldset>
 
       <div class="footer">
-        <a href="https://github.com/envenomator/envenomator.github.io"
-          >Agon VDP installer</a
-        > &mdash;
-        powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>.
+          Agon VDP installer is powered by <a href="https://esphome.github.io/esp-web-tools/">ESP Web Tools</a>
+      </div>
     </div>
     <script>
       document.querySelectorAll('input[name="type"]').forEach(radio =>
